@@ -1,13 +1,13 @@
+import json
 from tkinter import *
 from tkinter import filedialog
 import os
+import runner
 
 window = Tk()
 window.title("面向应急车辆的信号抢占方法")
 window.geometry("480x200")
 
-# lbl = Label(window, text="Hello")
-# lbl.grid(column=0, row=0)
 
 # 起点和终点
 start_label = Label(window, text="起     点:")
@@ -40,12 +40,12 @@ file_label_path1 = Label(window, text="文件路径:")
 file_label_path2 = Label(window, text="")
 # 地图文件
 
-global file
+file = ''
 
 def file_clicked():
     global file
     file = filedialog.askopenfilename(
-        filetypes=(("Text files", "*.xml"), ("all files", "*.*")),
+        filetypes=(("Text files", "*.cfg"), ("all files", "*.*")),
         initialdir=os.path.dirname(__file__)
     )
     file_label_path2.configure(text=file)
@@ -62,11 +62,17 @@ def clicked():
     _from_ = _start.get()
     _end_ = _end.get()
     _scale_ = selected.get()
+    global file
     _path_ = file
-    print(_from_, _end_, _scale_, _path_)
+    runner.traci_runner(_from_, _end_, _scale_, _path_)
 
 
 btn = Button(window, text="确认", command=clicked)
 btn.grid(column=3, row=5)
+
+# 输出
+label_output = Label(window, text="输出文件在output文件夹中")
+label_output.grid(column=3, row=6, columnspan=3)
+
 
 window.mainloop()
