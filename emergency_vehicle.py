@@ -89,7 +89,7 @@ class EmergencyVehicle(traci.StepListener):
                     Flag = False
 
                 stage_control.stage_0.stage_0(preempt, tl)
-                print('stage=0')
+                # print('stage=0')
             elif tl.tl_stage == 1:
                 if Flag:
                     if traci.simulation.getTime()%20 == 0:
@@ -101,28 +101,28 @@ class EmergencyVehicle(traci.StepListener):
                     Flag = False
 
                 stage_control.stage_1.stage_1(preempt, tl)
-                print('stage=1')
+                # print('stage=1')
             elif tl.tl_stage == 2:
                 # 非侵入式信号抢占
                 stage_control.stage_2.stage_2(preempt, tl)
-                print('stage=2')
+                # print('stage=2')
                 pass
             elif tl.tl_stage == 3:
                 # 侵入式信号抢占
                 stage_control.stage_3.stage_3(preempt, tl)
-                print('stage=3')
+                # print('stage=3')
                 pass
             elif tl.tl_stage == 4:
                 # 强制跳转
                 stage_control.stage_4.stage_4(preempt, tl)
-                print('stage=4')
+                # print('stage=4')
             elif tl.tl_stage == 5:
                 # 信号恢复状态
                 stage_control.stage_5.stage_5(preempt, tl)
-                print('stage=5')
+                # print('stage=5')
             else:
-                print('tlID:' + str(tl.tlId) + 'stage:' + str(tl.tl_stage))
-                print('stage=6')
+                # print('tlID:' + str(tl.tlId) + 'stage:' + str(tl.tl_stage))
+                # print('stage=6')
                 pass
         pass
 

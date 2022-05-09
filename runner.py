@@ -26,7 +26,7 @@ def run(pathFile, EVFrom, EVTo):
         try:
             traci.vehicle.getNextTLS('ev')
             evSpeed.append(traci.vehicle.getSpeed('ev'))
-
+            print('PK ')
             traci.addStepListener(Emergency_Vehicle.tl_classification())
         except:
             if Flag:

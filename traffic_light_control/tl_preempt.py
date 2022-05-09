@@ -1,9 +1,12 @@
+import json
+
 import numpy
 import cvxopt
 from cvxopt import matrix, solvers
 import traci
 import tripInfo
 import math
+import time
 
 
 class Preemption_Stage():
@@ -276,8 +279,18 @@ class Preemption_Stage():
 
     def noninvasive_main(self, tl):
         """ 非侵入式信号抢占，可行时返回True,否则返回false """
+        pathFile = '../output/qp.json'
+        f = open(pathFile, 'w+')
+
         if tl.tl_programInfo.PN == 4:
+            s_time = time.time()
             tl.noninvasiveFlag = self.noninvasive_4(tl)
+            e_time = time.time()
+            data = {'method': 'QP', 'PN': 4, 'duration': "use {:.5}s".format(e_time - s_time)}
+            f.write(json.dumps(data))
+            f.write('\n')
+            f.close()
+            # print("use {:.5}s".format(e_time - s_time))
         elif tl.tl_programInfo.PN == 2:
             tl.noninvasiveFlag = self.noninvasive_2(tl)
 
